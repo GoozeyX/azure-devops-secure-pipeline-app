@@ -1,0 +1,20 @@
+# This yaml adds another layer of security
+# to have a dependency on a yaml file in a separate repository
+# Still requires that the service connection as an approval & Check
+# on the dedicated template.yml
+
+
+resources:
+  repositories: 
+  # references a dedicated repository
+  - repository: templates
+    type: github
+    endpoint: github.com_woehrl01
+    name: woehrl01/azure-devops-secure-pipeline-definition
+    ref: refs/heads/master
+
+extends:
+  template: template.yml@templates
+  parameters:
+    azure_subscription: $(subscription)
+    keyvault_name: $(keyvaultname)

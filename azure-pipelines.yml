@@ -1,0 +1,19 @@
+# This template can be used to have a dependency
+# on the same repository
+# This requires to have an Approval & Check on the Service Connection
+# that is extends the specific yaml file.
+
+resources:
+  repositories: 
+  # references the repo itself, but forces the master branch
+  - repository: templates
+    type: github
+    endpoint: github.com_woehrl01
+    name: woehrl01/azure-devops-secure-pipeline-app
+    ref: refs/heads/master
+
+extends:
+  template: template.yml@templates
+  parameters:
+    azure_subscription: $(subscription)
+    keyvault_name: $(keyvaultname)

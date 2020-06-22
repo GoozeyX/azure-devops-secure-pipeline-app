@@ -1,0 +1,19 @@
+parameters:
+- name: azure_subscription
+  type: string
+- name: keyvault_name
+  type: string
+
+stages:
+- stage: Execute
+  jobs:
+  - job: Execute
+    steps:
+    - task: AzureKeyVault@1
+      inputs:
+        azureSubscription: ${{ parameters.azure_subscription }}
+        KeyVaultName: ${{ parameters.keyvault_name }}
+        SecretsFilter: 'SecretConnectionString'
+        RunAsPreJob: false
+    #use env
+    - script: echo $(SecretConnectionString) 
